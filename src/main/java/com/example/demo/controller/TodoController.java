@@ -57,17 +57,20 @@ public class TodoController {
 	}	
 
 	@PostMapping({"", "/"})
-	String saveTodo(@Valid Todo todo, BindingResult bindingResult, Model model){
-		Todo titleExists = todoService.findByTitle(todo.getTitle());
-		if(bindingResult.hasErrors()){
-			return "redirect:/users";
-		}else if(titleExists != null){
-			bindingResult.rejectValue("title", "error.post",
-							"That username is already taken");
+	String saveTodo(
+			@RequestParam("todo") Todo todo,
+			@PathVariable("username") String username,
+			BindingResult bindingResult, 
+			Model model
+			){
+		Todo titleExists = todoService.findByTitleAndUsername(todo.getTitle(), username);
+		if(titleExists != null){
+			bindingResult.rejectValue("title", "error.todo",
+						"There is already todo with given title");
 		}	
-		
-		todoService.add(todo);
-		return "/" + todo.getId();
+				
+			todoService.save(todo);
+			return "/" + todo.getId();
 	}
 	
 }

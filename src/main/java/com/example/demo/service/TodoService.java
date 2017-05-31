@@ -14,4 +14,6 @@ public interface TodoService {
 
 	void save(Todo todo);
 
+	Todo findByTitleAndUsername(String title, String username);
+
 }

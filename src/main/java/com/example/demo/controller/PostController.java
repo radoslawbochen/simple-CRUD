@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.entity.Post;
 import com.example.demo.entity.User;
 import com.example.demo.service.PostService;
 
@@ -25,13 +26,13 @@ public class PostController {
 	
 	@GetMapping({"", "/"})
 	String showPosts(@PathVariable("id") Long id, Model model){
-		model.addAttribute("posts", postService.getAll());
+		model.addAttribute("posts", postService.findAll());
 		return "post";
 	}
 	
 	@GetMapping("/{id}")
 	String showPost(@PathVariable("id") Long id, Model model){
-		model.addAttribute("post", postService.getById(id));
+		model.addAttribute("post", postService.findById(id));
 		return "post";
 	}
 	

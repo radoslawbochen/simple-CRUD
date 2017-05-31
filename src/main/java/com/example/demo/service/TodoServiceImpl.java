@@ -48,4 +48,17 @@ public class TodoServiceImpl implements TodoService {
 		
 	}
 
+	@Override
+	public Todo findByTitleAndUsername(String title, String username) {
+		Todo todo = null;
+		List<Todo> todos = findByUsername(username);		
+		for(Todo tempTodo : todos){
+			if(tempTodo.getTitle() == title){
+				todo = tempTodo;
+				break;
+			}
+		}
+		return todo;
+	}
+
 }
