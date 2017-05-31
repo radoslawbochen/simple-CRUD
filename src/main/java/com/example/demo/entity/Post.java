@@ -13,6 +13,8 @@ public class Post {
 	@JsonProperty("body")
 	public String body;
 		
+	public Post(){	}
+	
 	public Post(Long id, Long userId, String title, String body) {
 		super();
 		this.id = id;

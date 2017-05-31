@@ -18,7 +18,9 @@ public class User {
 	public String phone;
 	@JsonProperty("website")
 	public String website;
-		
+	
+	public User() {	}
+	
 	public User(Long id, String name, String username, String email, String phone, String website) {
 		super();
 		this.id = id;
@@ -28,10 +30,7 @@ public class User {
 		this.phone = phone;
 		this.website = website;
 	}
-	
-	public User() {
-		// TODO Auto-generated constructor stub
-	}
+		
 	public Long getId() {
 		return id;
 	}

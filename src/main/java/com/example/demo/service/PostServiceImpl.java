@@ -28,10 +28,7 @@ public class PostServiceImpl implements PostService {
 			if(allPostsItr.hasPrevious()){
 				posts.add(allPostsItr.previous());				
 			}
-		}
-		for(Post tempPost : posts){
-			System.out.println(tempPost.getTitle());
-		}
+		}		
 		return posts;
 	}
 

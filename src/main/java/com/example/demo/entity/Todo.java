@@ -13,6 +13,8 @@ public class Todo {
 	@JsonProperty("completed")
 	public Boolean completed;
 	
+	public Todo(){	}
+	
 	public Todo(Long id, Long userId, String title, Boolean completed) {
 		super();
 		this.id = id;
@@ -21,10 +23,6 @@ public class Todo {
 		this.completed = completed;
 	}
 	
-	public Todo(){
-		
-	}
-
 	public Long getId() {
 		return id;
 	}
