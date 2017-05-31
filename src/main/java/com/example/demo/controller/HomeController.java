@@ -13,7 +13,7 @@ public class HomeController {
 	@Autowired
 	PostService postService;
 	
-	@GetMapping("/home")
+	@GetMapping("/")
 	String index(Model model){		
 		model.addAttribute("latest5Posts", postService.findLatest5());
 		return "index";

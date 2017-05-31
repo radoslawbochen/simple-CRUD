@@ -3,11 +3,13 @@ package com.example.demo.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.demo.entity.Post;
 
+@Repository
 public class PostDao {
 
 	public List<Post> findAll(){		
