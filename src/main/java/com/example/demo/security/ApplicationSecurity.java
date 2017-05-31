@@ -12,9 +12,8 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter{
 	    http
 	        .authorizeRequests()
             	.antMatchers("/").permitAll()
-	            .antMatchers("/login").permitAll()
-	            .antMatchers("/users/**").hasRole("USER")
-	            .antMatchers("/manage/**").hasRole("ADMIN");
+	            .antMatchers("/users").hasRole("USER")
+	            .antMatchers("/users/login").permitAll();
 	}
 	
 }
