@@ -9,7 +9,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.demo.entity.Todo;
-import com.example.demo.entity.User;
 
 @Repository
 public class TodoDao {
@@ -17,7 +16,7 @@ public class TodoDao {
 	@Autowired
 	UserDao userDao;
 	
-	public List<Todo> findAll(){		
+	public List<Todo> findAll(){
 		ArrayList<Todo> allTodos = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
         int todoId = 1;
@@ -45,6 +44,5 @@ public class TodoDao {
         }
         
        return todo;
-	}
-	
+	}	
 }

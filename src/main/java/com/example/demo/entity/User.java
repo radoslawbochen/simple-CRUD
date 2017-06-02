@@ -2,8 +2,6 @@ package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Data;
-
 public class User {
 	
 	@JsonProperty("id")
