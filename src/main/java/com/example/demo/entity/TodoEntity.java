@@ -2,49 +2,56 @@ package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Post {
-	
+public class TodoEntity {
+
 	@JsonProperty("id")
 	public Long id;
 	@JsonProperty("userId")
 	public Long userId;
 	@JsonProperty("title")
 	public String title;
-	@JsonProperty("body")
-	public String body;
-		
-	public Post(){	}
+	@JsonProperty("completed")
+	public Boolean completed;
 	
-	public Post(Long id, Long userId, String title, String body) {
+	public TodoEntity(){	}
+	
+	public TodoEntity(Long id, Long userId, String title, Boolean completed) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.title = title;
-		this.body = body;
+		this.completed = completed;
 	}
+	
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public Long getUserId() {
 		return userId;
 	}
+
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getBody() {
-		return body;
+
+	public Boolean getCompleted() {
+		return completed;
 	}
-	public void setBody(String body) {
-		this.body = body;
+
+	public void setCompleted(Boolean completed) {
+		this.completed = completed;
 	}	
-	
 }

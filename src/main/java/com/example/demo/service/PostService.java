@@ -2,20 +2,21 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import com.example.demo.entity.Post;
+import com.example.demo.api.dto.PostDto;
+import com.example.demo.entity.PostEntity;
 
 public interface PostService {
 
-	List<Post> findLatest5();
+	List<PostDto> findLatest5();
 
-	List<Post> findAll();
+	List<PostDto> findAll();
 
-	Post findById(Long id);
+	PostDto findById(Long id);
 
 	void deleteById(Long id);
 
-	void add(Post post);
+	PostDto add(PostDto postDto);
 
-	Post findByTitle(String title);
+	PostDto findByTitle(String title);
 
 }
