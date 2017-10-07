@@ -3,46 +3,42 @@ package com.example.demo.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.demo.entity.TodoEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.demo.entity.Todo;
-
 @Repository
 public class TodoDao {
 
-	@Autowired
-	UserDao userDao;
-	
-	public List<Todo> findAll(){
-		ArrayList<Todo> allTodos = new ArrayList<>();
+	public List<TodoEntity> findAll(){
+		ArrayList<TodoEntity> allTodoEntities = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
         int todoId = 1;
-        Todo tempTodo;        
+        TodoEntity tempTodoEntity;
         do{
         	try{
-        		tempTodo = restTemplate.getForObject("https://jsonplaceholder.typicode.com/todos/" + todoId, Todo.class);
+        		tempTodoEntity = restTemplate.getForObject("https://jsonplaceholder.typicode.com/todos/" + todoId, TodoEntity.class);
         	}catch (HttpClientErrorException e){
         		break;
         	}
-		allTodos.add(tempTodo);
+		allTodoEntities.add(tempTodoEntity);
 		todoId++;
-        }while (tempTodo != null);
+        }while (tempTodoEntity != null);
         
-       return allTodos;		
+       return allTodoEntities;
 	}
 	
-	public Todo findById(Long id){
+	public TodoEntity findById(Long id){
 		RestTemplate restTemplate = new RestTemplate();
-        Todo todo;
+        TodoEntity todoEntity;
         try{
-        	todo = restTemplate.getForObject("https://jsonplaceholder.typicode.com/todos/" + id, Todo.class);
+        	todoEntity = restTemplate.getForObject("https://jsonplaceholder.typicode.com/todos/" + id, TodoEntity.class);
         }catch (HttpClientErrorException e){
-        	todo = null;
+        	todoEntity = null;
         }
         
-       return todo;
+       return todoEntity;
 	}	
 }

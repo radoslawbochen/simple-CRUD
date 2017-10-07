@@ -1,10 +1,9 @@
 package com.example.demo.api.controller;
 
 import com.example.demo.api.dto.TodoDto;
+import com.example.demo.entity.TodoEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.entity.Todo;
 import com.example.demo.service.TodoService;
 
 import java.util.List;
@@ -24,16 +22,11 @@ public class TodoController {
 
 	@Autowired
 	TodoService todoService;
-	
-	@GetMapping("")
-	public List<TodoDto> todos(@PathVariable("username") String username){
-		return todoService.findByUsername(username);
-	}
-	
+
 	@GetMapping("/{id}")
 	public TodoDto todo(
 			@PathVariable("username") String username,
-			@PathVariable("id") Long id,
+			@PathVariable("id") Long id
 			){
 		return todoService.findById(id);
 	}
@@ -47,17 +40,17 @@ public class TodoController {
 	}
 	
 	@PutMapping("/{id}")
-	public TodoDto updateTodo(@RequestParam("todo") Todo todo){
-		return todoService.save(todo);
+	public TodoDto updateTodo(@RequestParam("todoEntity") TodoDto todoDto){
+		return todoService.save(todoDto);
 
 	}	
 
 	@PostMapping({"", "/"})
 	public TodoDto saveTodo(
-			@RequestParam("todo") Todo todo,
+			@RequestParam("todoEntity") TodoDto todoDto,
 			@PathVariable("username") String username
 			){
-			return todoService.save(todo);
+			return todoService.save(todoDto);
 	}
 	
 }

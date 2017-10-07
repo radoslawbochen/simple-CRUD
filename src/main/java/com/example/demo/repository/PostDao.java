@@ -3,43 +3,42 @@ package com.example.demo.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.demo.entity.PostEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.demo.entity.Post;
-
 @Repository
 public class PostDao {
 
-	public List<Post> findAll(){		
-		ArrayList<Post> allPosts = new ArrayList<>();
+	public List<PostEntity> findAll(){
+		ArrayList<PostEntity> allPostEntities = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
         int postId = 1;
-        Post tempPost;        
+        PostEntity tempPostEntity;
         do{
         	try{
-        		tempPost = restTemplate.getForObject("https://jsonplaceholder.typicode.com/posts/" + postId, Post.class);
+        		tempPostEntity = restTemplate.getForObject("https://jsonplaceholder.typicode.com/posts/" + postId, PostEntity.class);
         	}catch (HttpClientErrorException e){
         		break;
         	}
-		allPosts.add(tempPost);
+		allPostEntities.add(tempPostEntity);
 		postId++;
-        }while (tempPost != null);
+        }while (tempPostEntity != null);
         
-       return allPosts;		
+       return allPostEntities;
 	}
 	
-	public Post findById(Long id){
+	public PostEntity findById(Long id){
 		RestTemplate restTemplate = new RestTemplate();
-		Post post;
+		PostEntity postEntity;
         try{
-        	post = restTemplate.getForObject("https://jsonplaceholder.typicode.com/todos/" + id, Post.class);
+        	postEntity = restTemplate.getForObject("https://jsonplaceholder.typicode.com/todos/" + id, PostEntity.class);
         }catch (HttpClientErrorException e){
-        	post = null;
+        	postEntity = null;
         }
         
-       return post;
+       return postEntity;
 	}
 	
 }
