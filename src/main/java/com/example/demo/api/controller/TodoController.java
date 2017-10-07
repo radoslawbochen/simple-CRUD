@@ -1,7 +1,6 @@
-package com.example.demo.controller;
+package com.example.demo.api.controller;
 
-import javax.validation.Valid;
-
+import com.example.demo.api.dto.TodoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Todo;
-import com.example.demo.entity.User;
 import com.example.demo.service.TodoService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/users/{username}/todo")
@@ -26,51 +26,38 @@ public class TodoController {
 	TodoService todoService;
 	
 	@GetMapping("")
-	String todos(@PathVariable("username") String username, Model model){
-		model.addAttribute(todoService.findByUsername(username));
-		return "todos";
+	public List<TodoDto> todos(@PathVariable("username") String username){
+		return todoService.findByUsername(username);
 	}
 	
 	@GetMapping("/{id}")
-	String todo(
+	public TodoDto todo(
 			@PathVariable("username") String username,
 			@PathVariable("id") Long id,
-			Model model
 			){
-		model.addAttribute(todoService.findById(id));
-		return "todo";
+		return todoService.findById(id);
 	}
 	
 	@DeleteMapping("/{id}")
-	String deleteTodo(
+	public void deleteTodo(
 			@PathVariable(value = "id") Long id,
 			@PathVariable(value = "username") String username
 			){
 		todoService.deleteById(id);
-		return "redirect:/users/{username}/todo";
 	}
 	
 	@PutMapping("/{id}")
-	String updateTodo(@RequestParam("todo") Todo todo){
-		todoService.save(todo);
-		return "todo";
+	public TodoDto updateTodo(@RequestParam("todo") Todo todo){
+		return todoService.save(todo);
+
 	}	
 
 	@PostMapping({"", "/"})
-	String saveTodo(
+	public TodoDto saveTodo(
 			@RequestParam("todo") Todo todo,
-			@PathVariable("username") String username,
-			BindingResult bindingResult, 
-			Model model
+			@PathVariable("username") String username
 			){
-		Todo titleExists = todoService.findByTitleAndUsername(todo.getTitle(), username);
-		if(titleExists != null){
-			bindingResult.rejectValue("title", "error.todo",
-						"There is already todo with given title");
-		}	
-				
-			todoService.save(todo);
-			return "/" + todo.getId();
+			return todoService.save(todo);
 	}
 	
 }
